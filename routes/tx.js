@@ -5,6 +5,7 @@ var async = require('async');
 var web3 = require('../utils/web3');
 var abi = require('ethereumjs-abi');
 var abiDecoder = require('abi-decoder');
+var BigNumber = require('bignumber.js');
 
 router.get('/pending', function(req, res, next) {
   
@@ -113,7 +114,9 @@ router.get('/:tx', function(req, res, next) {
         }
       });
     }
-    // console.log(tx.traces);    
+    tx.fee = new BigNumber(tx.gasPrice).times(tx.gasUsed).toFixed();
+    tx.gasPrice = new BigNumber(tx.gasPrice).toFixed();
+    // console.log(tx.traces);
     res.render('tx', { tx: tx });
   });
   

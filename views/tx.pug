@@ -43,7 +43,7 @@ block content
       td #{ethformatter(tx.gasPrice)}
     tr
       td 手续费:
-      td #{ethformatter(tx.gasUsed * tx.gasPrice)}
+      td #{ethformatter(tx.fee)}
     if tx.callInfo
       tr
         td Function Name:
