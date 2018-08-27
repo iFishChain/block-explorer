@@ -4,6 +4,13 @@
  * Module dependencies.
  */
 
+process.on('uncaughtException', function uncaughtExceptionListener(err) {
+  console.error('UNCAUGHT EXCEPTION ');
+  console.error('[Inside \'uncaughtException\' event] ' + err.stack || err.message);
+  //quit and disconnect
+  process.exit(1);
+});
+
 var app = require('../app');
 var debug = require('debug')('ifish-chain-explorer:server');
 var http = require('http');
