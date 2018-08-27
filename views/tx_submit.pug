@@ -1,11 +1,11 @@
 extends layout
 
 block content
-  h3 Submit raw transaction
+  h3 发送离线交易
   form(action="/tx/submit", method="post")
     .form-group
-      label(for="txHex") Signed Transaction Hex
+      label(for="txHex") 签名后的交易16进制数据
       textarea.form-control#txHex(rows=15, name="txHex", placeholder="0x...")
-    button.btn.btn-default.pull-right(type="submit") Submit
+    button.btn.btn-default.pull-right(type="submit") 发送
   if message
     p #{message}

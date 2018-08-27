@@ -4,22 +4,22 @@ block content
   br
   .row
     .col-md-1
-      a.btn.btn-primary(href="/block/" + (block.number - 1), role="button") Previous
+      a.btn.btn-primary(href="/block/" + (block.number - 1), role="button") 上一个
     .col-md-10.text-center
       h3 Block #{block.number}
     .col-md-1
-      a.btn.btn-primary(href="/block/" + (block.number + 1), role="button") Next
+      a.btn.btn-primary(href="/block/" + (block.number + 1), role="button") 下一个
 
   table.table
     tr
       td Hash:
       td #{block.hash}
     tr
-      td Parent hash: 
+      td 父区块Hash:
       td 
         a(href="/block/" + block.parentHash) #{block.parentHash}
     tr
-      td Miner: 
+      td 矿工:
       td  
         a(href="/account/" + block.author) #{nameformatter.format(block.author)}
     tr
@@ -29,22 +29,22 @@ block content
       td Gas Used:
       td #{numeral(block.gasUsed).format()}
     tr
-      td Difficulty:
+      td 难度:
       td #{numeral(block.difficulty).format()}
     tr
-      td Total Difficulty:
+      td 总难度:
       td #{numeral(block.totalDifficulty).format()}
     tr
-      td Timestamp:
-      td #{moment.unix(block.timestamp).format()} (#{moment.unix(block.timestamp).fromNow()})
+      td 时间:
+      td #{moment.unix(block.timestamp).format('YYYY-MM-DD HH:mm:ss Z')} (#{moment.unix(block.timestamp).fromNow()})
     tr
-      td Size:
+      td 大小:
       td #{numeral(block.size).format()}
     tr
-      td Transactions:
+      td 交易数量:
       td #{block.transactions.length}
     tr
-      td Uncles:
+      td 叔块:
       td
         if block.uncles && block.uncles.length > 0
           each uncle, index in block.uncles
@@ -52,18 +52,18 @@ block content
               a(href="uncle/" + block.hash + "/" + index) #{index + " - " + uncle}
         else
           | 0
-  h4 Transactions
+  h4 交易
   if block.transactions.length === 0
-    p Block does not contain any transactions.
+    p 该区块中没有交易.
   else
     table.table
       thead
         tr
           th Hash
-          th Type
-          th From
-          th To
-          th Amount
+          th 动作
+          th 发送者
+          th 接收者
+          th 数量
       tbody
         for tx in block.transactions
           tr

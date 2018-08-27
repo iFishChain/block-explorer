@@ -1,5 +1,5 @@
 var async = require('async');
-var Web3 = require('web3');
+var web3 = require('../utils/web3');
 
 var nodeStatus = function(config) {
   var self = this;
@@ -9,9 +9,7 @@ var nodeStatus = function(config) {
   this.version = "";
   
   this.updateStatus = function() {
-    var web3 = new Web3();
-    web3.setProvider(config.provider);
-    
+
     async.waterfall([
       function(callback) {
         web3.version.getNode(function(err, result) {

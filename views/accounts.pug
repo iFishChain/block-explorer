@@ -1,13 +1,13 @@
 extends layout
 
 block content
-  h3 Accounts
+  h3 账户
   table.table
     thead
       tr
-        th Address
-        th Type
-        th Balance
+        th 地址
+        th 类型
+        th 余额
     tbody
       for account in accounts
         tr
@@ -15,4 +15,4 @@ block content
             a(href="/account/" + account.address) #{nameformatter.format(account.address)}
           td #{account.type}
           td #{ethformatter(account.balance)}
-  a.btn.btn-default(href="/accounts/" + lastAccount) Next Page
+  a.btn.btn-default(href="/accounts/" + lastAccount) 下一页

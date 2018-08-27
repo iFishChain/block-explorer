@@ -1,10 +1,8 @@
-var BigNumber = require('bignumber.js');
-
-var Ether     = new BigNumber(10e+17);
+//var BigNumber = require('bignumber.js');
+var web3      = require('./web3');
 
 function formatAmount(amount) {
-  var ret = new BigNumber(amount.toString());
-  
-  return ret.dividedBy(Ether) + " ETH";
+  return web3.fromWei(amount).toFixed() + " iFish";
 }
+
 module.exports = formatAmount;

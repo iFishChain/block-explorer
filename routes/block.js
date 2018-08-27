@@ -2,13 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 var async = require('async');
-var Web3 = require('web3');
+var web3 = require('../utils/web3');
 
 router.get('/:block', function(req, res, next) {
   
-  var config = req.app.get('config');  
-  var web3 = new Web3();
-  web3.setProvider(config.provider);
+  var config = req.app.get('config');
   
   async.waterfall([
     function(callback) {
@@ -52,9 +50,7 @@ router.get('/:block', function(req, res, next) {
 router.get('/uncle/:hash/:number', function(req, res, next) {
   
   var config = req.app.get('config');  
-  var web3 = new Web3();
-  web3.setProvider(config.provider);
-  
+
   async.waterfall([
     function(callback) {
       web3.eth.getUncle(req.params.hash, req.params.number, true, function(err, result) {

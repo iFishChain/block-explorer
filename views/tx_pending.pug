@@ -1,18 +1,18 @@
 extends layout
 
 block content
-  h3 Pending Transactions
+  h3 待处理交易
   
   if txs.length === 0
-    p Currently there are no pending transactions
+    p 当前没有待处理的交易
   else
     table.table
       thead
         tr
           th Hash
-          th From
-          th To
-          th Amount
+          th 发送者
+          th 接收者
+          th 数量
           th Gas Price
       tbody
         for tx in txs

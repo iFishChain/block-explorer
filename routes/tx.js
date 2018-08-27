@@ -2,15 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 var async = require('async');
-var Web3 = require('web3');
+var web3 = require('../utils/web3');
 var abi = require('ethereumjs-abi');
 var abiDecoder = require('abi-decoder');
 
 router.get('/pending', function(req, res, next) {
   
-  var config = req.app.get('config');  
-  var web3 = new Web3();
-  web3.setProvider(config.provider);
+  var config = req.app.get('config');
   
   async.waterfall([
     function(callback) {
@@ -37,9 +35,7 @@ router.post('/submit', function(req, res, next) {
     return res.render('tx_submit', { message: "No transaction data specified"});
   }
   
-  var config = req.app.get('config');  
-  var web3 = new Web3();
-  web3.setProvider(config.provider);
+  var config = req.app.get('config');
   
   async.waterfall([
     function(callback) {
@@ -58,9 +54,7 @@ router.post('/submit', function(req, res, next) {
 
 router.get('/:tx', function(req, res, next) {
   
-  var config = req.app.get('config');  
-  var web3 = new Web3();
-  web3.setProvider(config.provider);
+  var config = req.app.get('config');
   
   var db = req.app.get('db');
   
@@ -127,9 +121,7 @@ router.get('/:tx', function(req, res, next) {
 
 router.get('/raw/:tx', function(req, res, next) {
   
-  var config = req.app.get('config');  
-  var web3 = new Web3();
-  web3.setProvider(config.provider);
+  var config = req.app.get('config');
   
   async.waterfall([
     function(callback) {

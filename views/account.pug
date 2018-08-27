@@ -2,25 +2,25 @@ extends layout
 
 block content
   if account.isContract
-    h3 Contract #{account.address}
+    h3 合约 #{account.address}
   else
-    h3 Account #{account.address}
+    h3 账户 #{account.address}
   table.table
     tr
-      td Balance:
+      td 余额:
       td #{ethformatter(account.balance)}
     if account.name
       tr
-        td Name:
+        td 名称:
         td #{account.name}
 
   div
     ul.nav.nav-tabs(role='tablist')
       li.active(role='presentation')
-        a(href='#transactions', aria-controls='transactions', role='tab', data-toggle='tab') Transactions
+        a(href='#transactions', aria-controls='transactions', role='tab', data-toggle='tab') 交易
       if account.isContract
         li(role='presentation')
-          a(href='#code', aria-controls='code', role='tab', data-toggle='tab') Code
+          a(href='#code', aria-controls='code', role='tab', data-toggle='tab') 合约
       if account.source
         li(role='presentation')
           a(href='#source', aria-controls='source', role='tab', data-toggle='tab') Source
@@ -28,17 +28,17 @@ block content
           a(href='#contractState', aria-controls='source', role='tab', data-toggle='tab') Contract State
     .tab-content
       #transactions.tab-pane.active(role='tabpanel')
-        h3 Recent Activity
+        h3 最近交易
         table.table
           thead
             tr
               th Hash
-              th Block
-              th Type
+              th 区块号
+              th 动作
               th
-              th From
-              th To
-              th Amount
+              th 发送者
+              th 接收者
+              th 数量
           tbody
             for block in account.blocks
               for trace in block

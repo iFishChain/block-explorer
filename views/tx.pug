@@ -1,48 +1,48 @@
 extends layout
 
 block content
-  h3 Transaction #{tx.hash}
+  h3 交易 #{tx.hash}
   table.table
     tr
       td Hash: 
       td
         a(href="/tx/" + tx.hash) #{tx.hash}
     tr
-      td Block hash: 
+      td 区块Hash:
       td
         a(href="/block/" + tx.blockHash) #{tx.blockHash}
     tr
-      td Block number: 
+      td 区块号:
       td
         a(href="/block/" + tx.blockNumber) #{tx.blockNumber}
     tr
-      td From:
+      td 发送者:
       td
         a(href="/account/" + tx.from) #{nameformatter.format(tx.from)}
     tr
-      td To:
+      td 接收者:
       td
         if tx.to
           a(href="/account/" + tx.to) #{nameformatter.format(tx.to)}
         else
           | New Contract
     tr
-      td Amount:
+      td 数量:
       td #{ethformatter(tx.value)}
     tr
-      td Nonce:
+      td 序号:
       td #{tx.nonce}
     tr
-      td Gas Limit:
+      td Gas限制:
       td #{tx.gas}
     tr
-      td Gas Used:
+      td Gas消耗:
       td #{tx.gasUsed}
     tr
-      td Gas Price: 
+      td Gas价格:
       td #{ethformatter(tx.gasPrice)}
     tr
-      td Fee:
+      td 手续费:
       td #{ethformatter(tx.gasUsed * tx.gasPrice)}
     if tx.callInfo
       tr
@@ -71,7 +71,7 @@ block content
                     td.parameter-cell #{JSON.stringify(pa.value, null, 2)}
     if tx.logs
       tr
-        td Events:
+        td 事件:
         td
           for log in tx.logs
             table.table
@@ -98,20 +98,20 @@ block content
                             td #{event.value}
                   td #{log.address}
     tr
-      td Data:
+      td 原始数据:
       td
         pre #{tx.input}
     
   a(href="/tx/raw/" + tx.hash) Raw Trace
-  h4 Internal Transactions
+  h4 合约内部交易
   table.table
     thead
       tr
         th
-        th Type
-        th From
-        th To
-        th Amount
+        th 动作
+        th 发送者
+        th 接收者
+        th 数量
     tbody
       for trace in tx.traces
         tr

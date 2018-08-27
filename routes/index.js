@@ -2,14 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 var async = require('async');
-var Web3 = require('web3');
-
+var web3 = require('../utils/web3');
 
 router.get('/', function(req, res, next) {
   
-  var config = req.app.get('config');  
-  var web3 = new Web3();
-  web3.setProvider(config.provider);
+  var config = req.app.get('config');
   
   async.waterfall([
     function(callback) {
@@ -19,7 +16,7 @@ router.get('/', function(req, res, next) {
     }, function(lastBlock, callback) {
       var blocks = [];
       
-      var blockCount = 10;
+      var blockCount = 50;
       
       if (lastBlock.number - blockCount < 0) {
         blockCount = lastBlock.number + 1;
