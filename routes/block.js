@@ -5,9 +5,9 @@ var async = require('async');
 var web3 = require('../utils/web3');
 
 router.get('/:block', function(req, res, next) {
-  
+
   var config = req.app.get('config');
-  
+
   async.waterfall([
     function(callback) {
       web3.eth.getBlock(req.params.block, true, function(err, result) {
@@ -25,7 +25,7 @@ router.get('/:block', function(req, res, next) {
     if (err) {
       return next(err);
     }
-    
+
     block.transactions.forEach(function(tx) {
       tx.traces = [];
       tx.failed = false;
@@ -44,11 +44,11 @@ router.get('/:block', function(req, res, next) {
     });
     res.render('block', { block: block });
   });
-  
+
 });
 
 router.get('/uncle/:hash/:number', function(req, res, next) {
-  
+
   var config = req.app.get('config');  
 
   async.waterfall([
@@ -67,12 +67,12 @@ router.get('/uncle/:hash/:number', function(req, res, next) {
     if (err) {
       return next(err);
     }
-     
+
     console.log(uncle);
-    
+
     res.render('uncle', { uncle: uncle, blockHash: req.params.hash });
   });
-  
+
 });
 
 module.exports = router;

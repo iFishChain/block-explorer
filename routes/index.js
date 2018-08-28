@@ -5,9 +5,9 @@ var async = require('async');
 var web3 = require('../utils/web3');
 
 router.get('/', function(req, res, next) {
-  
+
   var config = req.app.get('config');
-  
+
   async.waterfall([
     function(callback) {
       web3.eth.getBlock("latest", false, function(err, result) {
@@ -15,13 +15,13 @@ router.get('/', function(req, res, next) {
       });
     }, function(lastBlock, callback) {
       var blocks = [];
-      
+
       var blockCount = 50;
-      
+
       if (lastBlock.number - blockCount < 0) {
         blockCount = lastBlock.number + 1;
       }
-      
+
       async.times(blockCount, function(n, next) {
         web3.eth.getBlock(lastBlock.number - n, true, function(err, block) {
           next(err, block);
@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
     if (err) {
       return next(err);
     }
-    
+
     var txs = [];
     blocks.forEach(function(block) {
       block.transactions.forEach(function(tx) {
@@ -46,7 +46,7 @@ router.get('/', function(req, res, next) {
     });
     res.render('index', { blocks: blocks, txs: txs });
   });
-  
+
 });
 
 module.exports = router;

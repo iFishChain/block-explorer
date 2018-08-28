@@ -37,13 +37,13 @@ block content
       td #{tx.gas}
     tr
       td Gas消耗:
-      td #{tx.gasUsed}
+      td #{receipt.gasUsed}
     tr
       td Gas价格:
       td #{ethformatter(tx.gasPrice)}
     tr
       td 手续费:
-      td #{ethformatter(tx.fee)}
+      td #{ethformatter(fee)}
     if tx.callInfo
       tr
         td Function Name:

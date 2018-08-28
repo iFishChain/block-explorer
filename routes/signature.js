@@ -11,7 +11,7 @@ router.post('/verify', function(req, res, next) {
   var ethereumAddress = req.body.ethereumAddress.toLowerCase().replace("0x", "");
   var message = req.body.message;
   var signature = req.body.signature;
-  
+
   if (!ethereumAddress) {
     res.render('verifySignature', { result: { error: "Invalid Ethereum Address"}, message: message, signature: signature, ethereumAddress: ethereumAddress });
     return;
@@ -24,7 +24,7 @@ router.post('/verify', function(req, res, next) {
     res.render('verifySignature', { result: { error: "Invalid Signature"}, message: message, signature: signature, ethereumAddress: ethereumAddress });
     return;
   }
-  
+
   try {
     var msgSha = utils.sha3(message);
     var sigDecoded = utils.fromRpcSig(signature);
